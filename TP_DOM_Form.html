@@ -63,81 +63,100 @@
             <button id="btnInscrire" class="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700" onclick="verifierFormulaire()">S'inscrire</button>
         </div>
     </div>
-
     <script>
-        function verifierFormulaire() {
-            // Récupérer les champs du formulaire
-            let nom = document.getElementById("nom").value.trim();
-            let prenom = document.getElementById("prenom").value.trim();
-            let mail = document.getElementById("mail").value.trim();
-            let pseudo = document.getElementById("pseudo").value.trim();
-            let motdepasse = document.getElementById("motdepasse").value.trim();
-            let confmotdepasse = document.getElementById("confmotdepasse").value.trim();
+function verifierFormulaire() {
+    // Récupérer les champs du formulaire
+    let nom = document.getElementById("nom").value.trim();
+    let prenom = document.getElementById("prenom").value.trim();
+    let mail = document.getElementById("mail").value.trim();
+    let pseudo = document.getElementById("pseudo").value.trim();
+    let motdepasse = document.getElementById("motdepasse").value.trim();
+    let confmotdepasse = document.getElementById("confmotdepasse").value.trim();
 
-            // Initialiser les variables d'erreur
-            let isValid = true;
+    // Initialiser les variables d'erreur
+    let isValid = true;
 
-            // Réinitialiser les messages d'erreur
-            document.getElementById("nomError").innerHTML = "";
-            document.getElementById("prenomError").innerHTML = "";
-            document.getElementById("mailError").innerHTML = "";
-            document.getElementById("pseudoError").innerHTML = "";
-            document.getElementById("motdepasseError").innerHTML = "";
-            document.getElementById("confmotdepasseError").innerHTML = "";
+    // Réinitialiser les messages d'erreur
+    document.getElementById("nomError").innerHTML = "";
+    document.getElementById("prenomError").innerHTML = "";
+    document.getElementById("mailError").innerHTML = "";
+    document.getElementById("pseudoError").innerHTML = "";
+    document.getElementById("motdepasseError").innerHTML = "";
+    document.getElementById("confmotdepasseError").innerHTML = "";
 
-            // Validation du nom
-            if (nom === "") {
-                document.getElementById("nomError").innerHTML = "Le nom est obligatoire.";
-                isValid = false;
-            }
+    // Validation du nom
+    if (nom === "") {
+        document.getElementById("nomError").innerHTML = "Le nom est obligatoire.";
+        isValid = false;
+    } else if (!validateName(nom)) {
+        document.getElementById("nomError").innerHTML = "Le nom ne peut contenir que des lettres, espaces, apostrophes ou tirets.";
+        isValid = false;
+    }
 
-            // Validation du prénom
-            if (prenom === "") {
-                document.getElementById("prenomError").innerHTML = "Le prénom est obligatoire.";
-                isValid = false;
-            }
+    // Validation du prénom
+    if (prenom === "") {
+        document.getElementById("prenomError").innerHTML = "Le prénom est obligatoire.";
+        isValid = false;
+    } else if (!validateName(prenom)) {
+        document.getElementById("prenomError").innerHTML = "Le prénom ne peut contenir que des lettres, espaces, apostrophes ou tirets.";
+        isValid = false;
+    }
 
-            // Validation de l'adresse mail
-            if (mail === "") {
-                document.getElementById("mailError").innerHTML = "Le mail est obligatoire.";
-                isValid = false;
-            } else if (!validateEmail(mail)) {
-                document.getElementById("mailError").innerHTML = "Le format de l'adresse mail est incorrect.";
-                isValid = false;
-            }
+    // Validation de l'adresse mail
+    if (mail === "") {
+        document.getElementById("mailError").innerHTML = "Le mail est obligatoire.";
+        isValid = false;
+    } else if (!validateEmail(mail)) {
+        document.getElementById("mailError").innerHTML = "Le format de l'adresse mail est incorrect.";
+        isValid = false;
+    }
 
-            // Validation du pseudo
-            if (pseudo === "") {
-                document.getElementById("pseudoError").innerHTML = "Le pseudo est obligatoire.";
-                isValid = false;
-            }
+    // Validation du pseudo
+    if (pseudo === "") {
+        document.getElementById("pseudoError").innerHTML = "Le pseudo est obligatoire.";
+        isValid = false;
+    }
 
-            // Validation du mot de passe
-            if (motdepasse === "") {
-                document.getElementById("motdepasseError").innerHTML = "Le mot de passe est obligatoire.";
-                isValid = false;
-            } else if (motdepasse.length < 6) {
-                document.getElementById("motdepasseError").innerHTML = "Le mot de passe doit contenir au moins 6 caractères.";
-                isValid = false;
-            }
+    // Validation du mot de passe
+    if (motdepasse === "") {
+        document.getElementById("motdepasseError").innerHTML = "Le mot de passe est obligatoire.";
+        isValid = false;
+    } else if (motdepasse.length < 6) {
+        document.getElementById("motdepasseError").innerHTML = "Le mot de passe doit contenir au moins 6 caractères.";
+        isValid = false;
+    }
 
-            // Vérification des mots de passe
-            if (confmotdepasse !== motdepasse) {
-                document.getElementById("confmotdepasseError").innerHTML = "Les mots de passe ne correspondent pas.";
-                isValid = false;
-            }
+    // Vérification des mots de passe
+    if (confmotdepasse !== motdepasse) {
+        document.getElementById("confmotdepasseError").innerHTML = "Les mots de passe ne correspondent pas.";
+        isValid = false;
+    }
 
-            // Si tout est valide, afficher un message de succès
-            if (isValid) {
-                alert("Inscription réussie !");
-            }
-        }
+    // Si tout est valide, afficher un message de succès
+    if (isValid) {
+        alert("Inscription réussie !");
+    }
+}
 
-        // Fonction pour valider l'email
-        function validateEmail(email) {
-            const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-            return re.test(String(email).toLowerCase());
-        }
+// Fonction pour valider les noms et prénoms (seulement des lettres, espaces, apostrophes, et tirets)
+function validateName(name) {
+    // Supprimer les espaces au début et à la fin
+    const trimmedName = name.trim(); 
+
+    // Vérifier qu'il y a au moins une lettre alphabétique et pas de caractères spéciaux non autorisés
+    const re = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/; // Autorise les lettres, accents, espaces, apostrophes, et tirets
+
+    // Si le champ est vide ou ne correspond pas à cette regex, retourne faux
+    return re.test(trimmedName) && trimmedName.length > 0;
+}
+
+// Fonction pour valider l'email
+function validateEmail(email) {
+    const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return re.test(String(email).toLowerCase());
+}
+
+        
     </script>
 
 </body>
