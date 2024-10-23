@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouton</title>
+</head>
+<body>
+
+<h1>Bouton</h1>
+
+<!-- Zone de texte -->
+<input type="text" id="inputText" placeholder="Entrez du texte ici">
+
+<!-- Bouton -->
+<button id="btnChanger" onclick="changerNom()">Changer le nom</button>
+
+<script>
+    function changerNom() {
+        // Récupérer le contenu de la zone de texte
+        var texte = document.getElementById("inputText").value;
+
+        // Si la zone de texte n'est pas vide
+        if (texte) {
+            // Changer le nom du bouton avec le contenu de la zone de texte
+            document.getElementById("btnChanger").innerHTML = texte;
+
+            // Vider la zone de texte
+            document.getElementById("inputText").value = "";
+        }
+    }
+</script>
+
+</body>
+</html>
