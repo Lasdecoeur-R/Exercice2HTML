@@ -4,144 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire de Création de Compte</title>
+    
+    <!-- Link to Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-        /* Un peu de style pour le formulaire */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
+        /* Styles pour les messages d'erreur */
         .error {
             color: red;
-            font-size: 12px;
+            font-size: 0.875rem; /* Texte un peu plus petit pour les erreurs */
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
 
-<h1>Formulaire de Création de Compte</h1>
+    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold text-center mb-6 text-gray-700">Formulaire de Création de Compte</h1>
 
-<!-- Formulaire -->
-<div id="formulaire">
-    <div class="form-group">
-        <label for="nom">Nom :</label><br>
-        <input type="text" id="nom" placeholder="Nom">
-        <span class="error" id="nomError"></span>
+        <!-- Formulaire -->
+        <div id="formulaire">
+            <div class="mb-4">
+                <label for="nom" class="block text-sm font-medium text-gray-700">Nom :</label>
+                <input type="text" id="nom" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Nom">
+                <span class="error" id="nomError"></span>
+            </div>
+
+            <div class="mb-4">
+                <label for="prenom" class="block text-sm font-medium text-gray-700">Prénom :</label>
+                <input type="text" id="prenom" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Prénom">
+                <span class="error" id="prenomError"></span>
+            </div>
+
+            <div class="mb-4">
+                <label for="mail" class="block text-sm font-medium text-gray-700">Mail :</label>
+                <input type="email" id="mail" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Mail">
+                <span class="error" id="mailError"></span>
+            </div>
+
+            <div class="mb-4">
+                <label for="pseudo" class="block text-sm font-medium text-gray-700">Pseudo :</label>
+                <input type="text" id="pseudo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Pseudo">
+                <span class="error" id="pseudoError"></span>
+            </div>
+
+            <div class="mb-4">
+                <label for="motdepasse" class="block text-sm font-medium text-gray-700">Mot de passe :</label>
+                <input type="password" id="motdepasse" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Mot de passe">
+                <span class="error" id="motdepasseError"></span>
+            </div>
+
+            <div class="mb-4">
+                <label for="confmotdepasse" class="block text-sm font-medium text-gray-700">Vérification du mot de passe :</label>
+                <input type="password" id="confmotdepasse" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Vérification du mot de passe">
+                <span class="error" id="confmotdepasseError"></span>
+            </div>
+
+            <!-- Bouton -->
+            <button id="btnInscrire" class="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700" onclick="verifierFormulaire()">S'inscrire</button>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="prenom">Prénom :</label><br>
-        <input type="text" id="prenom" placeholder="Prénom">
-        <span class="error" id="prenomError"></span>
-    </div>
+    <script>
+        function verifierFormulaire() {
+            // Récupérer les champs du formulaire
+            let nom = document.getElementById("nom").value.trim();
+            let prenom = document.getElementById("prenom").value.trim();
+            let mail = document.getElementById("mail").value.trim();
+            let pseudo = document.getElementById("pseudo").value.trim();
+            let motdepasse = document.getElementById("motdepasse").value.trim();
+            let confmotdepasse = document.getElementById("confmotdepasse").value.trim();
 
-    <div class="form-group">
-        <label for="mail">Mail :</label><br>
-        <input type="email" id="mail" placeholder="Mail">
-        <span class="error" id="mailError"></span>
-    </div>
+            // Initialiser les variables d'erreur
+            let isValid = true;
 
-    <div class="form-group">
-        <label for="pseudo">Pseudo :</label><br>
-        <input type="text" id="pseudo" placeholder="Pseudo">
-        <span class="error" id="pseudoError"></span>
-    </div>
+            // Réinitialiser les messages d'erreur
+            document.getElementById("nomError").innerHTML = "";
+            document.getElementById("prenomError").innerHTML = "";
+            document.getElementById("mailError").innerHTML = "";
+            document.getElementById("pseudoError").innerHTML = "";
+            document.getElementById("motdepasseError").innerHTML = "";
+            document.getElementById("confmotdepasseError").innerHTML = "";
 
-    <div class="form-group">
-        <label for="motdepasse">Mot de passe :</label><br>
-        <input type="password" id="motdepasse" placeholder="Mot de passe">
-        <span class="error" id="motdepasseError"></span>
-    </div>
+            // Validation du nom
+            if (nom === "") {
+                document.getElementById("nomError").innerHTML = "Le nom est obligatoire.";
+                isValid = false;
+            }
 
-    <div class="form-group">
-        <label for="confmotdepasse">Vérification du mot de passe :</label><br>
-        <input type="password" id="confmotdepasse" placeholder="Vérification du mot de passe">
-        <span class="error" id="confmotdepasseError"></span>
-    </div>
+            // Validation du prénom
+            if (prenom === "") {
+                document.getElementById("prenomError").innerHTML = "Le prénom est obligatoire.";
+                isValid = false;
+            }
 
-    <!-- Bouton -->
-    <button id="btnInscrire" onclick="verifierFormulaire()">S'inscrire</button>
-</div>
-<script>
-    function verifierFormulaire() {
-        // Récupérer les champs du formulaire
-        let nom = document.getElementById("nom").value.trim();
-        let prenom = document.getElementById("prenom").value.trim();
-        let mail = document.getElementById("mail").value.trim();
-        let pseudo = document.getElementById("pseudo").value.trim();
-        let motdepasse = document.getElementById("motdepasse").value.trim();
-        let confmotdepasse = document.getElementById("confmotdepasse").value.trim();
+            // Validation de l'adresse mail
+            if (mail === "") {
+                document.getElementById("mailError").innerHTML = "Le mail est obligatoire.";
+                isValid = false;
+            } else if (!validateEmail(mail)) {
+                document.getElementById("mailError").innerHTML = "Le format de l'adresse mail est incorrect.";
+                isValid = false;
+            }
 
-        // Initialiser les variables d'erreur
-        let isValid = true;
+            // Validation du pseudo
+            if (pseudo === "") {
+                document.getElementById("pseudoError").innerHTML = "Le pseudo est obligatoire.";
+                isValid = false;
+            }
 
-        // Réinitialiser les messages d'erreur
-        document.getElementById("nomError").innerHTML = "";
-        document.getElementById("prenomError").innerHTML = "";
-        document.getElementById("mailError").innerHTML = "";
-        document.getElementById("pseudoError").innerHTML = "";
-        document.getElementById("motdepasseError").innerHTML = "";
-        document.getElementById("confmotdepasseError").innerHTML = "";
+            // Validation du mot de passe
+            if (motdepasse === "") {
+                document.getElementById("motdepasseError").innerHTML = "Le mot de passe est obligatoire.";
+                isValid = false;
+            } else if (motdepasse.length < 6) {
+                document.getElementById("motdepasseError").innerHTML = "Le mot de passe doit contenir au moins 6 caractères.";
+                isValid = false;
+            }
 
-        // Validation du nom
-        if (nom === "") {
-            document.getElementById("nomError").innerHTML = "Le nom est obligatoire.";
-            isValid = false;
+            // Vérification des mots de passe
+            if (confmotdepasse !== motdepasse) {
+                document.getElementById("confmotdepasseError").innerHTML = "Les mots de passe ne correspondent pas.";
+                isValid = false;
+            }
+
+            // Si tout est valide, afficher un message de succès
+            if (isValid) {
+                alert("Inscription réussie !");
+            }
         }
 
-        // Validation du prénom
-        if (prenom === "") {
-            document.getElementById("prenomError").innerHTML = "Le prénom est obligatoire.";
-            isValid = false;
+        // Fonction pour valider l'email
+        function validateEmail(email) {
+            const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            return re.test(String(email).toLowerCase());
         }
-
-        // Validation de l'adresse mail
-        if (mail === "") {
-            document.getElementById("mailError").innerHTML = "Le mail est obligatoire.";
-            isValid = false;
-        } else if (!validateEmail(mail)) {
-            document.getElementById("mailError").innerHTML = "Le format de l'adresse mail est incorrect.";
-            isValid = false;
-        }
-
-        // Validation du pseudo
-        if (pseudo === "") {
-            document.getElementById("pseudoError").innerHTML = "Le pseudo est obligatoire.";
-            isValid = false;
-        }
-
-        // Validation du mot de passe
-        if (motdepasse === "") {
-            document.getElementById("motdepasseError").innerHTML = "Le mot de passe est obligatoire.";
-            isValid = false;
-        } else if (motdepasse.length < 6) {
-            document.getElementById("motdepasseError").innerHTML = "Le mot de passe doit contenir au moins 6 caractères.";
-            isValid = false;
-        }
-
-        // Vérification des mots de passe
-        if (confmotdepasse !== motdepasse) {
-            document.getElementById("confmotdepasseError").innerHTML = "Les mots de passe ne correspondent pas.";
-            isValid = false;
-        }
-
-        // Si tout est valide, afficher un message de succès
-        if (isValid) {
-            alert("Inscription réussie !");
-        }
-    }
-
-    // Fonction pour valider l'email
-    function validateEmail(email) {
-        const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        return re.test(String(email).toLowerCase());
-    }
-</script>
+    </script>
 
 </body>
 </html>
