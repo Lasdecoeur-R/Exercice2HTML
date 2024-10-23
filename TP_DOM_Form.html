@@ -14,11 +14,30 @@
             color: red;
             font-size: 0.875rem; /* Texte un peu plus petit pour les erreurs */
         }
+
+        /* Animation personnalisée */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .btn-bounce:hover {
+            animation: bounce 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center h-screen">
 
     <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+        <!-- Image au-dessus du titre -->
+        <div class="flex justify-center mb-4">
+            <img src="https://cdn-icons-png.flaticon.com/512/5569/5569750.png" alt="Image d'utilisateur" class="w-20 h-20">
+        </div>
+        
         <h1 class="text-2xl font-bold text-center mb-6 text-gray-700">Formulaire de Création de Compte</h1>
 
         <!-- Formulaire -->
@@ -59,10 +78,11 @@
                 <span class="error" id="confmotdepasseError"></span>
             </div>
 
-            <!-- Bouton -->
-            <button id="btnInscrire" class="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700" onclick="verifierFormulaire()">S'inscrire</button>
+            <!-- Bouton avec animation de rebond -->
+            <button id="btnInscrire" class="w-full bg-indigo-600 text-white p-2 rounded-md transform transition-all duration-300 hover:bg-indigo-700 hover:scale-105 btn-bounce" onclick="verifierFormulaire()">S'inscrire</button>
         </div>
     </div>
+
     <script>
         function verifierFormulaire() {
             // Récupérer les champs du formulaire
@@ -140,13 +160,8 @@
 
         // Fonction pour valider les noms et prénoms (seulement des lettres, espaces, apostrophes, et tirets)
         function validateName(name) {
-            // Supprimer les espaces au début et à la fin
-            const trimmedName = name.trim(); 
-
-            // Vérifier qu'il y a au moins une lettre alphabétique et pas de caractères spéciaux non autorisés
-            const re = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/; // Autorise les lettres, accents, espaces, apostrophes, et tirets
-
-            // Si le champ est vide ou ne correspond pas à cette regex, retourne faux
+            const trimmedName = name.trim();
+            const re = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/;
             return re.test(trimmedName) && trimmedName.length > 0;
         }
 
