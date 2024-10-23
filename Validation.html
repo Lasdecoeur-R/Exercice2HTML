@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Terminée</title>
+    
+    <!-- Link to Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .success-message {
+            font-size: 1.5rem;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .redirect-message {
+            font-size: 1rem;
+            color: #555;
+        }
+    </style>
+
+    <script>
+        // Redirection automatique après 5 secondes vers la page d'accueil (index.html)
+        setTimeout(function(){
+            window.location.href = 'index.html'; // Changez 'index.html' avec l'URL de destination
+        }, 5000);
+    </script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <div class="bg-white p-8 rounded-lg shadow-lg text-center">
+        <h1 class="success-message">Inscription terminée avec succès !</h1>
+        <p class="redirect-message">Vous serez redirigé vers la page d'accueil dans quelques secondes...</p>
+        <p>Si vous n'êtes pas redirigé, <a href="index.html" class="text-indigo-600 underline">cliquez ici</a>.</p>
+    </div>
+
+</body>
+</html>
