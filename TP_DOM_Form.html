@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouton</title>
+</head>
+<body>
+
+    <h1>Formulaire de Création de Compte</h1>
+
+    <!-- Formulaire -->
+    <div id="formulaire">
+        <div class="form-group">
+            <label for="nom">Nom :</label><br>
+            <input type="text" id="nom" placeholder="Nom">
+            <span class="error" id="nomError"></span>
+        </div>
+    
+        <div class="form-group">
+            <label for="prenom">Prénom :</label><br>
+            <input type="text" id="prenom" placeholder="Prénom">
+            <span class="error" id="prenomError"></span>
+        </div>
+    
+        <div class="form-group">
+            <label for="mail">Mail :</label><br>
+            <input type="email" id="mail" placeholder="Mail">
+            <span class="error" id="mailError"></span>
+        </div>
+    
+        <div class="form-group">
+            <label for="pseudo">Pseudo :</label><br>
+            <input type="text" id="pseudo" placeholder="Pseudo">
+            <span class="error" id="pseudoError"></span>
+        </div>
+    
+        <div class="form-group">
+            <label for="motdepasse">Mot de passe :</label><br>
+            <input type="password" id="motdepasse" placeholder="Mot de passe">
+            <span class="error" id="motdepasseError"></span>
+        </div>
+    
+        <div class="form-group">
+            <label for="confmotdepasse">Vérification du mot de passe :</label><br>
+            <input type="password" id="confmotdepasse" placeholder="Vérification du mot de passe">
+            <span class="error" id="confmotdepasseError"></span>
+        </div>
+    
+        <!-- Bouton -->
+        <button id="btnInscrire" onclick="verifierFormulaire()">S'inscrire</button>
+    </div>
+
+<script>
+
+// Validation du nom
+if (nom === "") {
+            document.getElementById("nomError").innerHTML = "Le nom est obligatoire.";
+            isValid = false;
+        }
+</script>
+
+ <!-- <script>
+    function changerNom() {
+        // Récupérer le contenu de la zone de texte
+        var texte = document.getElementById("inputText").value;
+
+        // Si la zone de texte n'est pas vide
+        if (texte) {
+            // Changer le nom du bouton avec le contenu de la zone de texte
+            document.getElementById("btnChanger").innerHTML = texte;
+
+            // Vider la zone de texte
+            document.getElementById("inputText").value = "";
+        }
+    }
+</script>
+-->
+</body>
+</html>
